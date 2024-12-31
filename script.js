@@ -1,24 +1,25 @@
-let model, webcam;
+document.getElementById('verify-aadhaar').addEventListener('click', () => {
+    const aadhaar = document.getElementById('aadhaar').value.trim();
 
-async function loadModel() {
-    model = await tf.loadLayersModel('model/model.json');
-    console.log("Model loaded!");
-}
+    // Check the format of the dummy Aadhaar number
+    const isValidFormat = /^[2-9]{1}[0-9]{11}$/.test(aadhaar);
 
-document.getElementById('start-camera').addEventListener('click', async () => {
-    const webcamElement = document.getElementById('webcam');
-    webcam = await navigator.mediaDevices.getUserMedia({ video: true });
-    webcamElement.srcObject = webcam;
+    if (!isValidFormat) {
+        document.getElementById('result').innerText = "Invalid Dummy Aadhaar format!";
+        return;
+    }
+
+    // Fetch the list of stored dummy Aadhaar numbers from GitHub
+    fetch('dummy_database.json')
+        .then(response => response.json())
+        .then(data => {
+            const isVerified = data.dummyAadhaars.includes(aadhaar);
+            document.getElementById('result').innerText = isVerified 
+                ? "Dummy Aadhaar verified successfully!" 
+                : "Dummy Aadhaar verification failed!";
+        })
+        .catch(err => {
+            console.error("Error fetching database:", err);
+            document.getElementById('result').innerText = "Error verifying Dummy Aadhaar.";
+        });
 });
-
-document.getElementById('verify').addEventListener('click', async () => {
-    const video = document.getElementById('webcam');
-    const capture = tf.browser.fromPixels(video);
-    const prediction = await model.predict(capture.expandDims(0));
-    const result = prediction.argMax(-1).dataSync()[0];
-
-    const resultText = result === 0 ? "Face Verified" : "Verification Failed";
-    document.getElementById('result').innerText = resultText;
-});
-
-loadModel();
