@@ -3,31 +3,32 @@ let model, webcamStream;
 // Load the Teachable Machine model
 async function loadModel() {
     model = await tf.loadLayersModel('model/model.json');
-    console.log("Teachable Machine model loaded!");
+    console.log("Model loaded successfully!");
 }
 
 document.getElementById('verify-aadhaar').addEventListener('click', () => {
     const aadhaar = document.getElementById('aadhaar').value.trim();
 
-    // Check Aadhaar format
+    // Validate Aadhaar number format
     const isValidFormat = /^[2-9]{1}[0-9]{11}$/.test(aadhaar);
     if (!isValidFormat) {
-        document.getElementById('aadhaar-result').innerText = "Invalid Dummy Aadhaar format!";
+        document.getElementById('aadhaar-result').innerText = "Invalid Aadhaar format!";
         return;
     }
 
-    // Verify Aadhaar from the mock database
-    fetch('dummy_database.json')
+    // Fetch Aadhaar database from GitHub
+    const githubDatabaseUrl = 'https://raw.githubusercontent.com/<your-username>/<repository-name>/main/dummy_database.json';
+    fetch(githubDatabaseUrl)
         .then(response => response.json())
         .then(data => {
             const isVerified = data.dummyAadhaars.includes(aadhaar);
-            document.getElementById('aadhaar-result').innerText = isVerified
-                ? "Dummy Aadhaar verified successfully!"
-                : "Dummy Aadhaar verification failed!";
+            document.getElementById('aadhaar-result').innerText = isVerified 
+                ? "Aadhaar verified successfully!" 
+                : "Aadhaar verification failed!";
         })
         .catch(err => {
-            console.error("Error fetching database:", err);
-            document.getElementById('aadhaar-result').innerText = "Error verifying Dummy Aadhaar.";
+            console.error("Error fetching Aadhaar database:", err);
+            document.getElementById('aadhaar-result').innerText = "Error verifying Aadhaar.";
         });
 });
 
@@ -38,7 +39,7 @@ document.getElementById('start-camera').addEventListener('click', async () => {
         webcamElement.srcObject = webcamStream;
     } catch (err) {
         console.error("Error accessing webcam:", err);
-        document.getElementById('face-result').innerText = "Could not access the webcam.";
+        document.getElementById('face-result').innerText = "Could not access webcam.";
     }
 });
 
