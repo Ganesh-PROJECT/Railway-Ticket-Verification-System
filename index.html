@@ -3,19 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dummy Aadhaar Verification</title>
+    <title>Dummy Aadhaar and Face Verification</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Dummy Aadhaar Verification</h1>
-    <form id="verification-form">
-        <label for="aadhaar">Enter Dummy Aadhaar Number:</label>
-        <input type="text" id="aadhaar" placeholder="Enter 12-digit number" required maxlength="12">
-        <button type="button" id="verify-aadhaar">Verify</button>
-    </form>
-    <p id="result"></p>
+    <h1>Verification System</h1>
 
+    <section>
+        <h2>Step 1: Dummy Aadhaar Verification</h2>
+        <form id="verification-form">
+            <label for="aadhaar">Enter Dummy Aadhaar Number:</label>
+            <input type="text" id="aadhaar" placeholder="Enter 12-digit number" required maxlength="12">
+            <button type="button" id="verify-aadhaar">Verify Aadhaar</button>
+        </form>
+        <p id="aadhaar-result"></p>
+    </section>
+
+    <section>
+        <h2>Step 2: Face Verification</h2>
+        <button type="button" id="start-camera">Start Camera</button>
+        <video id="webcam" autoplay></video>
+        <button type="button" id="verify-face">Verify Face</button>
+        <p id="face-result"></p>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="model/model.json"></script>
     <script src="script.js"></script>
 </body>
 </html>
-
