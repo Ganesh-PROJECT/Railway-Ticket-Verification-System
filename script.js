@@ -17,7 +17,7 @@ document.getElementById('verify-aadhaar').addEventListener('click', () => {
     }
 
     // Fetch Aadhaar database from GitHub
-    const githubDatabaseUrl = 'https://raw.githubusercontent.com/<your-username>/<repository-name>/main/dummy_database.json';
+    const githubDatabaseUrl = 'https://raw.githubusercontent.com/ganesh-project/Railway-Ticket-Verification-System/main/dummy_database.json';
     fetch(githubDatabaseUrl)
         .then(response => response.json())
         .then(data => {
