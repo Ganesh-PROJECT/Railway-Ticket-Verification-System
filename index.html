@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aadhaar and Face Verification</title>
+    <title>Railway Ticket Verification</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Verification System</h1>
+    <h1>Railway Ticket Verification System</h1>
 
+    <!-- Section for ID Verification -->
     <section>
-        <h2>Step 1: Aadhaar Verification</h2>
-        <form id="aadhaar-form">
-            <label for="aadhaar">Enter Aadhaar Number:</label>
-            <input type="text" id="aadhaar" placeholder="Enter 12-digit number" maxlength="12" required>
-            <button type="button" id="verify-aadhaar">Verify Aadhaar</button>
+        <h2>Step 1: Enter Identification Number</h2>
+        <form id="id-form">
+            <label for="id-input">Enter ID Number:</label>
+            <input type="text" id="id-input" placeholder="Enter your ID" required>
+            <button type="button" id="verify-id">Verify ID</button>
         </form>
-        <p id="aadhaar-result"></p>
+        <p id="id-result"></p>
     </section>
 
+    <!-- Section for Face Verification -->
     <section>
         <h2>Step 2: Face Verification</h2>
         <button type="button" id="start-camera">Start Camera</button>
